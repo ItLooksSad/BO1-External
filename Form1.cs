@@ -129,5 +129,45 @@ namespace Black_Ops_1_external
             catch { }
 
         }
+
+        private void blackbirdToggle_Click(object sender, EventArgs e)
+        {
+            if (blackbirdToggle.Text == "Off")
+            {
+                blackbirdToggle.Text = "On";
+                blackbirdTimer.Start();
+            }
+            else
+            {
+                blackbirdTimer.Stop();
+                blackbirdToggle.Text = "Off";
+                m.WriteMemory("0x00EB1C30", "int", "0");
+            }
+        }
+
+        private void blackbirdTimer_Tick(object sender, EventArgs e)
+        {
+            m.WriteMemory("0x00EB1C30", "int", "1");
+        }
+
+        private void flinchTimer_Tick(object sender, EventArgs e)
+        {
+            m.WriteMemory("C51A5C, 18", "float", "0.0001");
+        }
+
+        private void flitchToggle_Click(object sender, EventArgs e)
+        {
+            if (flitchToggle.Text == "Off")
+            {
+                flitchToggle.Text = "On";
+                flinchTimer.Start();
+            }
+            else
+            {
+                flinchTimer.Stop();
+                flitchToggle.Text = "Off";
+                m.WriteMemory("C51A5C, 18", "float", "0.2");
+            }
+        }
     }
 }
